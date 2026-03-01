@@ -115,30 +115,49 @@ async function openTopic(topicId){
   window.currentSections = sections;
   showSection("notes");
 }
-function parseSections(markdown){
+function parseSections(markdown) {
 
-  return {
-    notes: extract(markdown, "## NOTES"),
-    viva: extract(markdown, "## VIVA"),
-    flashcards: extract(markdown, "## FLASHCARDS"),
-    algorithm: extract(markdown, "## ALGORITHM")
+  const sections = {
+    notes: "",
+    viva: "",
+    flashcards: "",
+    algorithm: ""
   };
-}
 
-function extract(text, marker) {
+  const lines = markdown.split("\n");
+  let current = null;
 
-  const start = text.indexOf(marker);
-  if (start === -1) return "Not available.";
+  lines.forEach(line => {
 
-  const remaining = text.substring(start + marker.length);
+    const trimmed = line.trim().toUpperCase();
 
-  const nextIndex = remaining.indexOf("## ", 1);
+    if (trimmed === "## NOTES") {
+      current = "notes";
+      return;
+    }
 
-  if (nextIndex === -1) {
-    return remaining.trim();
-  }
+    if (trimmed === "## VIVA") {
+      current = "viva";
+      return;
+    }
 
-  return remaining.substring(0, nextIndex).trim();
+    if (trimmed === "## FLASHCARDS") {
+      current = "flashcards";
+      return;
+    }
+
+    if (trimmed === "## ALGORITHM") {
+      current = "algorithm";
+      return;
+    }
+
+    if (current) {
+      sections[current] += line + "\n";
+    }
+
+  });
+
+  return sections;
 }
 
 function showSection(type){
