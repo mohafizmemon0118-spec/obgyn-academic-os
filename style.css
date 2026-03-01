@@ -1,3 +1,20 @@
+/* ===== GLOBAL ===== */
+
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== HEADER ===== */
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ===== MODE BUTTON CONTAINER ===== */
+
 .mode-buttons {
   margin-top: 40px;
   display: flex;
@@ -5,10 +22,20 @@
   flex-wrap: wrap;
 }
 
-.mode-buttons button {
+/* ===== BUTTON STYLE ===== */
+
+.mode-buttons button,
+.toggle {
   padding: 10px 18px;
   border-radius: 25px;
   border: none;
   cursor: pointer;
   font-weight: 600;
+  background: #4bbfa7;
+  color: white;
+  transition: 0.3s;
+}
+
+.mode-buttons button:hover {
+  opacity: 0.85;
 }
