@@ -177,22 +177,60 @@ function showSection(type){
     .map(l => l.trim())
     .filter(l => l.startsWith("Front:") || l.startsWith("Back:"));
 
-  let html = "";
+  let cards = [];
 
   for(let i=0; i<lines.length; i+=2){
-
     const front = lines[i]?.replace("Front:", "").trim();
     const back = lines[i+1]?.replace("Back:", "").trim();
-
     if(front && back){
-      html += `
-        <div class="flashcard" onclick="this.classList.toggle('show')">
-          <div class="front">${front}</div>
-          <div class="back">${back}</div>
-        </div>
-      `;
+      cards.push({ front, back });
     }
   }
+
+  window.flashcards = cards;
+  window.currentCardIndex = 0;
+
+  renderFlashcard();
+}
+function renderFlashcard(){
+
+  const contentDiv = document.getElementById("topicContent");
+  const card = window.flashcards[window.currentCardIndex];
+
+  contentDiv.innerHTML = `
+    <div class="flashcard-single">
+      <div class="question">${card.front}</div>
+      <div class="answer hidden">${card.back}</div>
+
+      <div class="controls">
+        <button onclick="toggleAnswer()">Reveal</button>
+        <button onclick="nextCard()">Next</button>
+        <button onclick="shuffleCards()">Shuffle</button>
+      </div>
+
+      <div class="counter">
+        Card ${window.currentCardIndex + 1} / ${window.flashcards.length}
+      </div>
+    </div>
+  `;
+}
+
+function toggleAnswer(){
+  const answer = document.querySelector(".answer");
+  answer.classList.toggle("hidden");
+}
+
+function nextCard(){
+  window.currentCardIndex =
+    (window.currentCardIndex + 1) % window.flashcards.length;
+  renderFlashcard();
+}
+
+function shuffleCards(){
+  window.flashcards.sort(() => Math.random() - 0.5);
+  window.currentCardIndex = 0;
+  renderFlashcard();
+}
 
   contentDiv.innerHTML = html;
 }
