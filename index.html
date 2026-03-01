@@ -9,5 +9,11 @@
 <body style="font-family: Arial; text-align: center; margin-top: 100px;">
   <h1>🩺 OBGYN Academic OS</h1>
   <p>Your intelligent cognitive training system is starting...</p>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
 </body>
 </html>
