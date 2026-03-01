@@ -172,35 +172,29 @@ function showSection(type){
 
   if(type === "flashcards"){
 
-    const lines = sectionMarkdown
-      .split("\n")
-      .map(l => l.trim())
-      .filter(l => l.startsWith("Front:") || l.startsWith("Back:"));
+  const lines = sectionMarkdown
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l.startsWith("Front:") || l.startsWith("Back:"));
 
-    let html = "";
+  let html = "";
 
-    for(let i=0; i<lines.length; i+=2){
+  for(let i=0; i<lines.length; i+=2){
 
-      const front = lines[i]?.replace("Front:", "").trim();
-      const back = lines[i+1]?.replace("Back:", "").trim();
+    const front = lines[i]?.replace("Front:", "").trim();
+    const back = lines[i+1]?.replace("Back:", "").trim();
 
-      if(front && back){
-        html += `
-          <div class="flashcard">
-            <div class="front">${front}</div>
-            <div class="back">${back}</div>
-          </div>
-        `;
-      }
+    if(front && back){
+      html += `
+        <div class="flashcard" onclick="this.classList.toggle('show')">
+          <div class="front">${front}</div>
+          <div class="back">${back}</div>
+        </div>
+      `;
     }
-
-    contentDiv.innerHTML = html;
-
-  } else {
-
-    contentDiv.innerHTML = marked.parse(sectionMarkdown);
-
   }
+
+  contentDiv.innerHTML = html;
 }
 
 </script>
