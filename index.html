@@ -10,7 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-
+.theme-toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+}
+.mode-buttons{
+  margin-top:30px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
 :root{
   --accent:#14b8a6;
   --bg-dark:#0b1220;
@@ -92,11 +102,7 @@ body.light .card{
   margin:0;
   font-size:17px;
 }
-
 .toggle{
-  position:fixed;
-  top:20px;
-  right:20px;
   background:var(--accent);
   color:white;
   border:none;
@@ -130,7 +136,7 @@ footer{
 
 <body>
 
-<button class="toggle" onclick="toggleMode()">Toggle Mode</button>
+<button class="toggle theme-toggle" onclick="toggleMode()">Toggle Mode</button>
 
 <header>
   <h1>🩺 OBGYN Academic OS</h1>
