@@ -136,21 +136,59 @@ footer{
   <p>Hybrid Cognitive Command Center</p>
 </header>
 
-<div class="container">
-  <div class="card"><h3>📚 Topics</h3></div>
+<div class="container" id="mainMenu">
+
+  <div class="card" onclick="loadTopics()">
+    <h3>📚 Topics</h3>
+  </div>
+
   <div class="card"><h3>🎯 Viva Mode</h3></div>
   <div class="card"><h3>🧠 Flashcards</h3></div>
   <div class="card"><h3>🔀 Algorithm</h3></div>
   <div class="card"><h3>🩺 Case Simulation</h3></div>
   <div class="card"><h3>⚡ Rapid Revision</h3></div>
+
 </div>
+
+<div id="contentArea" style="padding:20px;"></div>
 
 <footer>
   OBGYN Academic OS v2 — Elite Cognitive Training Platform
 </footer>
 
 <script>
+async function loadTopics() {
 
+  const mainMenu = document.getElementById("mainMenu");
+  const content = document.getElementById("contentArea");
+
+  mainMenu.style.display = "none";
+
+  const response = await fetch("topics.json");
+  const topics = await response.json();
+
+  content.innerHTML = "<h2>Available Topics</h2>";
+
+  topics.forEach(topic => {
+    content.innerHTML += `
+      <div class="card" style="margin-top:15px;">
+        <h3>${topic.title}</h3>
+        <p style="opacity:0.6;">${topic.category} • ${topic.examWeight}</p>
+      </div>
+    `;
+  });
+
+  content.innerHTML += `
+    <div style="margin-top:30px;">
+      <button onclick="goHome()" class="toggle">Back</button>
+    </div>
+  `;
+}
+
+function goHome(){
+  document.getElementById("mainMenu").style.display = "grid";
+  document.getElementById("contentArea").innerHTML = "";
+}
 function toggleMode(){
   const body=document.body;
   if(body.classList.contains("dark")){
