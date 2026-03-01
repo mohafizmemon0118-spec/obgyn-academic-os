@@ -112,3 +112,7 @@ footer{
   font-size:12px;
   opacity:0.4;
 }
+.mode-buttons button.active {
+  box-shadow: 0 0 0 2px #14b8a6 inset;
+  transform: scale(1.05);
+}
