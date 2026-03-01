@@ -116,3 +116,37 @@ footer{
   box-shadow: 0 0 0 2px #14b8a6 inset;
   transform: scale(1.05);
 }
+/* ===== MARKDOWN CONTENT STYLING ===== */
+
+#topicContent {
+  max-width: 850px;
+  margin-top: 30px;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+#topicContent h1,
+#topicContent h2,
+#topicContent h3 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+#topicContent ul {
+  padding-left: 20px;
+}
+
+#topicContent li {
+  margin-bottom: 8px;
+}
+
+#topicContent hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin: 25px 0;
+}
+
+body.light #topicContent hr {
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
