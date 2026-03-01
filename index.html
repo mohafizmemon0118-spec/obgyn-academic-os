@@ -172,7 +172,10 @@ function showSection(type){
 
   if(type === "flashcards"){
 
-    const lines = sectionMarkdown.split("\n").filter(l => l.trim() !== "");
+    const lines = sectionMarkdown
+      .split("\n")
+      .map(l => l.trim())
+      .filter(l => l.startsWith("Front:") || l.startsWith("Back:"));
 
     let html = "";
 
@@ -181,18 +184,22 @@ function showSection(type){
       const front = lines[i]?.replace("Front:", "").trim();
       const back = lines[i+1]?.replace("Back:", "").trim();
 
-      html += `
-        <div class="flashcard">
-          <div class="front">${front}</div>
-          <div class="back">${back}</div>
-        </div>
-      `;
+      if(front && back){
+        html += `
+          <div class="flashcard">
+            <div class="front">${front}</div>
+            <div class="back">${back}</div>
+          </div>
+        `;
+      }
     }
 
     contentDiv.innerHTML = html;
 
   } else {
+
     contentDiv.innerHTML = marked.parse(sectionMarkdown);
+
   }
 }
 
