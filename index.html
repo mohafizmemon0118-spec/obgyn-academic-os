@@ -12,12 +12,12 @@
 <style>
 
 :root{
-  --bg-dark:#0f172a;
-  --card-dark:#1e293b;
-  --text-dark:#e2e8f0;
   --accent:#14b8a6;
+  --bg-dark:#0b1220;
+  --card-dark:rgba(255,255,255,0.05);
+  --text-dark:#e6edf3;
 
-  --bg-light:#f8f6f2;
+  --bg-light:#f6f4ef;
   --card-light:#ffffff;
   --text-light:#1e293b;
 }
@@ -26,47 +26,53 @@ body{
   margin:0;
   font-family:'Inter',sans-serif;
   transition:0.4s ease;
+  overflow-x:hidden;
 }
 
 body.dark{
-  background:var(--bg-dark);
+  background:linear-gradient(135deg,#0b1220,#111827,#0b1220);
   color:var(--text-dark);
 }
 
 body.light{
-  background:var(--bg-light);
+  background:linear-gradient(135deg,#f6f4ef,#ffffff,#f6f4ef);
   color:var(--text-light);
 }
 
 header{
-  padding:30px 20px;
+  padding:40px 20px;
   text-align:center;
+  animation:fadeIn 1s ease;
 }
 
 header h1{
   font-family:'Caveat',cursive;
-  font-size:42px;
+  font-size:48px;
   margin:0;
   color:var(--accent);
+  letter-spacing:1px;
 }
 
 header p{
   opacity:0.7;
-  margin-top:5px;
+  margin-top:8px;
 }
 
 .container{
   padding:20px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:20px;
 }
 
 .card{
-  padding:20px;
-  border-radius:16px;
+  padding:25px;
+  border-radius:18px;
   cursor:pointer;
+  backdrop-filter:blur(12px);
   transition:0.3s ease;
+  border:1px solid rgba(255,255,255,0.08);
+  animation:fadeUp 0.8s ease;
 }
 
 body.dark .card{
@@ -78,39 +84,52 @@ body.light .card{
 }
 
 .card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 10px 30px rgba(20,184,166,0.3);
 }
 
 .card h3{
   margin:0;
-  font-size:16px;
+  font-size:17px;
 }
 
 .toggle{
   position:fixed;
-  top:15px;
-  right:15px;
+  top:20px;
+  right:20px;
   background:var(--accent);
   color:white;
   border:none;
-  padding:8px 14px;
-  border-radius:20px;
+  padding:10px 16px;
+  border-radius:30px;
   cursor:pointer;
+  font-weight:600;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
 footer{
   text-align:center;
-  padding:20px;
+  padding:30px;
   font-size:12px;
-  opacity:0.5;
+  opacity:0.4;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(-20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 </style>
 </head>
 
-<body class="dark">
+<body>
 
-<button class="toggle" onclick="toggleMode()">Light Mode</button>
+<button class="toggle" onclick="toggleMode()">Toggle Mode</button>
 
 <header>
   <h1>🩺 OBGYN Academic OS</h1>
@@ -118,35 +137,38 @@ footer{
 </header>
 
 <div class="container">
-
   <div class="card"><h3>📚 Topics</h3></div>
   <div class="card"><h3>🎯 Viva Mode</h3></div>
   <div class="card"><h3>🧠 Flashcards</h3></div>
   <div class="card"><h3>🔀 Algorithm</h3></div>
   <div class="card"><h3>🩺 Case Simulation</h3></div>
   <div class="card"><h3>⚡ Rapid Revision</h3></div>
-
 </div>
 
 <footer>
-  OBGYN Academic OS v1 — Cognitive Training Platform
+  OBGYN Academic OS v2 — Elite Cognitive Training Platform
 </footer>
 
 <script>
 
 function toggleMode(){
   const body=document.body;
-  const btn=document.querySelector(".toggle");
-
   if(body.classList.contains("dark")){
     body.classList.remove("dark");
     body.classList.add("light");
-    btn.innerText="Dark Mode";
+    localStorage.setItem("theme","light");
   }else{
     body.classList.remove("light");
     body.classList.add("dark");
-    btn.innerText="Light Mode";
+    localStorage.setItem("theme","dark");
   }
+}
+
+const savedTheme = localStorage.getItem("theme");
+if(savedTheme){
+  document.body.classList.add(savedTheme);
+}else{
+  document.body.classList.add("dark");
 }
 
 if ('serviceWorker' in navigator) {
