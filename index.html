@@ -125,15 +125,20 @@ function parseSections(markdown){
   };
 }
 
-function extract(text, marker){
+function extract(text, marker) {
 
-  const parts = text.split(marker);
-  if(parts.length < 2) return "Not available.";
+  const start = text.indexOf(marker);
+  if (start === -1) return "Not available.";
 
-  const after = parts[1];
-  const nextSection = after.split("## ")[0];
+  const remaining = text.substring(start + marker.length);
 
-  return nextSection.trim();
+  const nextIndex = remaining.indexOf("## ", 1);
+
+  if (nextIndex === -1) {
+    return remaining.trim();
+  }
+
+  return remaining.substring(0, nextIndex).trim();
 }
 
 function showSection(type){
