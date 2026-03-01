@@ -212,16 +212,54 @@ async function openTopic(topicId){
   const response = await fetch(`topics/${topicId}.md`);
   const markdown = await response.text();
 
-  const htmlContent = marked.parse(markdown);
+  const sections = parseSections(markdown);
 
   content.innerHTML = `
     <div>
-      <button onclick="loadTopics()" class="toggle">Back to Topics</button>
-      <div style="margin-top:40px;">
-        ${htmlContent}
+      <button onclick="loadTopics()" class="toggle">Back</button>
+
+      <div style="margin-top:40px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button onclick="showSection('notes')" class="toggle">Notes</button>
+        <button onclick="showSection('viva')" class="toggle">Viva</button>
+        <button onclick="showSection('flashcards')" class="toggle">Flashcards</button>
+        <button onclick="showSection('algorithm')" class="toggle">Algorithm</button>
       </div>
+
+      <div id="topicContent" style="margin-top:30px;"></div>
     </div>
   `;
+
+  window.currentSections = sections;
+  showSection("notes");
+}
+function parseSections(markdown){
+
+  return {
+    notes: extract(markdown, "## NOTES"),
+    viva: extract(markdown, "## VIVA"),
+    flashcards: extract(markdown, "## FLASHCARDS"),
+    algorithm: extract(markdown, "## ALGORITHM")
+  };
+}
+
+function extract(text, marker){
+
+  const parts = text.split(marker);
+  if(parts.length < 2) return "Not available.";
+
+  const after = parts[1];
+  const nextSection = after.split("## ")[0];
+
+  return nextSection.trim();
+}
+
+function showSection(type){
+
+  const contentDiv = document.getElementById("topicContent");
+
+  const sectionMarkdown = window.currentSections[type];
+
+  contentDiv.innerHTML = marked.parse(sectionMarkdown || "Not available.");
 }
 const savedTheme = localStorage.getItem("theme");
 if(savedTheme){
