@@ -163,24 +163,23 @@ function parseSections(markdown) {
 function showSection(type){
 
   const contentDiv = document.getElementById("topicContent");
+  const buttons = document.querySelectorAll(".mode-buttons button");
+
+  buttons.forEach(btn => btn.classList.remove("active"));
+
+  const activeBtn = [...buttons].find(btn =>
+    btn.getAttribute("onclick").includes(type)
+  );
+
+  if (activeBtn) activeBtn.classList.add("active");
 
   const sectionMarkdown = window.currentSections[type];
 
   if (!sectionMarkdown || sectionMarkdown.trim() === "") {
-  contentDiv.innerHTML = "<p>Not available.</p>";
-} else {
-  contentDiv.innerHTML = marked.parse(sectionMarkdown);
-}
-}
-const savedTheme = localStorage.getItem("theme");
-if(savedTheme){
-  document.body.classList.add(savedTheme);
-}else{
-  document.body.classList.add("dark");
-}
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
+    contentDiv.innerHTML = "<p>Not available.</p>";
+  } else {
+    contentDiv.innerHTML = marked.parse(sectionMarkdown);
+  }
 }
 
 </script>
