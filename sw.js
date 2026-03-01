@@ -1,4 +1,4 @@
-const CACHE_NAME = "obgyn-os-v1";
+const CACHE_NAME = "obgyn-os-v2";
 const urlsToCache = [
   "/obgyn-academic-os/",
   "/obgyn-academic-os/index.html",
