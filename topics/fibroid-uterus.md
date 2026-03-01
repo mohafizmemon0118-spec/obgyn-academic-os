@@ -1,6 +1,7 @@
 # Fibroid Uterus
 
 ## NOTES
+
 ### Definition
 Benign smooth muscle tumor of uterus.
 
@@ -12,6 +13,7 @@ Benign smooth muscle tumor of uterus.
 ---
 
 ## VIVA
+
 Q: What is fibroid?
 A: Benign smooth muscle tumor of uterus.
 
@@ -21,6 +23,7 @@ A: Menorrhagia.
 ---
 
 ## FLASHCARDS
+
 Front: Most common type?
 Back: Intramural
 
@@ -30,7 +33,8 @@ Back: GnRH analogues
 ---
 
 ## ALGORITHM
+
 1. Symptomatic?
 2. Desire fertility?
-3. Size of fibroid?
-4. Medical vs Surgical decision
+3. Size?
+4. Management plan
