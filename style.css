@@ -150,3 +150,19 @@ footer{
 body.light #topicContent hr {
   border-top: 1px solid rgba(0,0,0,0.2);
 }
+.flashcard{
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.flashcard .front{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.flashcard .back{
+  opacity: 0.8;
+}
