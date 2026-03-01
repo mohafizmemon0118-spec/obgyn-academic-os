@@ -172,9 +172,12 @@ async function loadTopics() {
 
   topics.forEach(topic => {
     content.innerHTML += `
-      <div class="card" style="margin-top:15px;">
+      <div class="card" style="margin-top:15px; cursor:pointer;" 
+           onclick="openTopic('${topic.id}')">
         <h3>${topic.title}</h3>
-        <p style="opacity:0.6;">${topic.category} • ${topic.examWeight}</p>
+        <p style="opacity:0.6;">
+          ${topic.category} • ${topic.examWeight}
+        </p>
       </div>
     `;
   });
@@ -202,7 +205,24 @@ function toggleMode(){
     localStorage.setItem("theme","dark");
   }
 }
+async function openTopic(topicId){
 
+  const content = document.getElementById("contentArea");
+
+  const response = await fetch(`topics/${topicId}.md`);
+  const markdown = await response.text();
+
+  const htmlContent = marked.parse(markdown);
+
+  content.innerHTML = `
+    <div>
+      <button onclick="loadTopics()" class="toggle">Back to Topics</button>
+      <div style="margin-top:40px;">
+        ${htmlContent}
+      </div>
+    </div>
+  `;
+}
 const savedTheme = localStorage.getItem("theme");
 if(savedTheme){
   document.body.classList.add(savedTheme);
