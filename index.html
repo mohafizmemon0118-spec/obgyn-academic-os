@@ -172,7 +172,7 @@ async function loadTopics() {
 
   topics.forEach(topic => {
     content.innerHTML += `
-      <div class="card" style="margin-top:15px; cursor:pointer;" 
+      <div class="card"
            onclick="openTopic('${topic.id}')">
         <h3>${topic.title}</h3>
         <p style="opacity:0.6;">
@@ -183,7 +183,6 @@ async function loadTopics() {
   });
 
   content.innerHTML += `
-    <div style="margin-top:30px;">
       <button onclick="goHome()" class="toggle">Back</button>
     </div>
   `;
