@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fibroid-uterus",
+    "title": "Fibroid Uterus",
+    "category": "Gynecology",
+    "difficulty": "High Yield",
+    "examWeight": "Very Important",
+    "formats": {
+      "notes": true,
+      "viva": true,
+      "flashcards": true,
+      "algorithm": true,
+      "case": true,
+      "revision": true
+    }
+  }
+]
