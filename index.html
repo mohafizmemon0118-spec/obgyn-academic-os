@@ -166,7 +166,11 @@ function showSection(type){
 
   const sectionMarkdown = window.currentSections[type];
 
-  contentDiv.innerHTML = marked.parse(sectionMarkdown || "Not available.");
+  if (!sectionMarkdown || sectionMarkdown.trim() === "") {
+  contentDiv.innerHTML = "<p>Not available.</p>";
+} else {
+  contentDiv.innerHTML = marked.parse(sectionMarkdown);
+}
 }
 const savedTheme = localStorage.getItem("theme");
 if(savedTheme){
