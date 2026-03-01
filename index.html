@@ -92,7 +92,7 @@ async function openTopic(topicId){
 
   const content = document.getElementById("contentArea");
 
-  const response = await fetch(`topics/${topicId}.md`);
+  const response = await fetch(`./topics/${topicId}.md`);
   const markdown = await response.text();
 
   const sections = parseSections(markdown);
